@@ -15,6 +15,10 @@ QA-Genie is a high-performance, single-page web application designed to automati
 - **Database Layer:** SQLite (`qa_agent.db`)
 - **AI Core Intelligence:** Google GenAI SDK (`gemini-2.5-flash`)
 
+## 👥 Team Members
+- 1. Mayuri Thakre
+- 2. Abijith UK
+
 ## 📁 Project Architecture Directory
 ```text
 ai-qa-agent/
@@ -69,8 +73,3 @@ The service layer will initialize and run locally on http://127.0.0.1:8000.
 
 4. Client Access
 Because this architecture features a lightweight, zero-overhead client layer, no complex frontend package compilation is required. Simply launch the user interface directly by opening frontend/index.html in any modern web browser instance.
-
-
-# Team Members
-1. Mayuri Thakre
-2. Abijith UK
