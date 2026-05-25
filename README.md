@@ -69,3 +69,8 @@ The service layer will initialize and run locally on http://127.0.0.1:8000.
 
 4. Client Access
 Because this architecture features a lightweight, zero-overhead client layer, no complex frontend package compilation is required. Simply launch the user interface directly by opening frontend/index.html in any modern web browser instance.
+
+
+# Team Members
+1. Mayuri Thakre
+2. Abijith UK
