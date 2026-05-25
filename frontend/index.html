@@ -80,8 +80,7 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="liveTableBody">
-                            </tbody>
+                        <tbody id="liveTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -102,10 +101,18 @@
                         <button id="generateBtn" onclick="triggerGeneration()">Generate Test Suite ✨</button>
                     </div>
 
-                    <div class="dashboard-card interactive-card">
-                        <h3>🚀 Generated Test Analytics</h3>
+                    <div class="dashboard-card interactive-card relative-container">
+                        <div class="card-header-row">
+                            <h3>🚀 Generated Test Analytics</h3>
+                            <button id="copyBtn" class="copy-button hidden" onclick="copyOutputToClipboard()">📋 Copy Output</button>
+                        </div>
                         <p class="card-subtitle">AI response payload matrix output:</p>
-                        <div id="loading" class="hidden">🤖 AI Agent is compiling test scripts... Please wait...</div>
+                        
+                        <div id="loading" class="spinner-container hidden">
+                            <div class="genie-spinner"></div>
+                            <p>🧞 Genie is thinking...</p>
+                        </div>
+
                         <div id="resultsDisplay" class="placeholder-text">Enter requirements and click Generate to start.</div>
                     </div>
                 </div>
@@ -158,20 +165,27 @@
                     
                     <div style="margin-bottom: 20px;">
                         <label style="display:block; margin-bottom:8px; font-size:0.9rem; color:var(--text-secondary);">Select Target AI Inference Engine Model:</label>
-                        <select id="modelSelector" onchange="updateModelDisplay()" style="width:100%; padding:10px; background:var(--bg-input); border:1px solid var(--border-color); color:white; border-radius:6px;">
+                        <select id="modelSelector" onchange="updateModelDisplay()" style="width:100%; padding:10px; background:var(--bg-input); border:1px solid var(--border-color); color:white; border-radius:6px; outline:none;">
                             <option value="Gemini 2.5 Flash">Gemini 2.5 Flash (Default Latency Optimization)</option>
                             <option value="Gemini 2.5 Pro">Gemini 2.5 Pro (Deep Context Analytical Model)</option>
                             <option value="Gemma 2B Local">Gemma 2B (Local Edge Inference Sandbox)</option>
                         </select>
                     </div>
 
-                    <div>
+                    <div style="margin-bottom: 24px;">
                         <label style="display:block; margin-bottom:8px; font-size:0.9rem; color:var(--text-secondary);">Model Temperature Strategy (Creativity vs Strict Logic):</label>
-                        <input type="range" min="0" max="100" value="20" style="width:100%; accent-color:var(--accent-green);">
+                        <input type="range" id="tempSlider" min="0" max="100" value="20" oninput="updateModelDisplay()" style="width:100%; accent-color:var(--accent-green);">
                         <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">
                             <span>Strict Edge Case Logic (0.0)</span>
                             <span>Exploratory Creative QA (1.0)</span>
                         </div>
+                    </div>
+
+                    <div class="info-metadata-card">
+                        <h4>📋 Engine Strategy Telemetry</h4>
+                        <p><strong>Selected Engine:</strong> <span id="infoModelName" style="color:var(--accent-green)">Gemini 2.5 Flash</span></p>
+                        <p><strong>Behavior Profile:</strong> <span id="infoTempMeaning" style="color:var(--accent-green)">Strict Edge Case Logic (0.2)</span></p>
+                        <div class="info-alert-text">⚙️ Settings are applied instantly to the next generation workspace context.</div>
                     </div>
                 </div>
             </div>

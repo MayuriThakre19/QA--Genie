@@ -10,23 +10,29 @@
     --border-color: #2c2c2e;
 }
 
-body {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-dark-base);
     color: var(--text-primary);
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
-/* Master Layout Grid */
+/* Master Layout Framework Fixes Empty Space */
 .app-container {
     display: grid;
     grid-template-columns: 260px 1fr;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
 }
 
-/* Left Sidebar Styles */
+/* Left Sidebar Layout */
 .sidebar {
     background-color: var(--bg-card);
     border-right: 1px solid var(--border-color);
@@ -34,6 +40,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 }
 
 .logo-area h2 {
@@ -98,12 +105,14 @@ body {
     color: white;
 }
 
-/* Main Workspace Content Area */
+/* Main Workspace Panel */
 .main-content {
     padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 24px;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .content-header {
@@ -124,7 +133,7 @@ body {
     border: 1px solid var(--border-color);
 }
 
-/* Card Styling Fundamentals */
+/* Card Structures */
 .dashboard-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -132,10 +141,16 @@ body {
     padding: 20px;
 }
 
-.dashboard-card h3 { margin: 0 0 6px 0; font-size: 1.1rem; }
-.card-subtitle { margin: 0 0 16px 0; color: var(--text-secondary); font-size: 0.85rem; }
+.dashboard-card h3 { margin: 0; font-size: 1.1rem; }
+.card-subtitle { margin: 4px 0 16px 0; color: var(--text-secondary); font-size: 0.85rem; }
 
-/* Interactive Workspace split grid */
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Interactive Layout Workspace Split */
 .workspace-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -145,7 +160,11 @@ body {
 .interactive-card {
     display: flex;
     flex-direction: column;
-    height: 320px;
+    height: 420px; /* Slightly expanded height for full text reading view */
+}
+
+.relative-container {
+    position: relative;
 }
 
 textarea {
@@ -163,7 +182,7 @@ textarea {
 
 textarea:focus { border-color: var(--accent-green); }
 
-button {
+button#generateBtn {
     background-color: var(--accent-green);
     color: #121214;
     border: none;
@@ -176,20 +195,113 @@ button {
     transition: background-color 0.2s;
 }
 
-button:hover { background-color: #02b350; }
+button#generateBtn:hover { background-color: #02b350; }
+button#generateBtn:disabled { background-color: #4a4a4a; cursor: not-allowed; color: #888; }
 
 #resultsDisplay {
     flex-grow: 1;
     background-color: var(--bg-input);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 12px;
+    padding: 16px;
     overflow-y: auto;
-    white-space: pre-wrap;
     font-size: 0.9rem;
 }
 
-/* Metrics Row Counter blocks */
+/* Clean Copy Button */
+.copy-button {
+    background-color: #2c2c2e;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.copy-button:hover {
+    background-color: #3a3a3c;
+    border-color: var(--accent-green);
+}
+
+/* Native CSS Loading Animation Spinner Component */
+.spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+    text-align: center;
+}
+
+.spinner-container p {
+    margin: 0;
+    font-weight: bold;
+    color: var(--accent-green);
+    font-size: 0.9rem;
+}
+
+.genie-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(4, 211, 97, 0.1);
+    border-top: 4px solid var(--accent-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Dynamic Parsed Section Cards Color Coding */
+.parsed-section {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 5px solid transparent;
+    color: #121214; /* Clear dark text for light readability grids */
+}
+
+.parsed-section h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.parsed-section p {
+    margin: 0;
+    white-space: pre-wrap;
+    line-height: 1.45;
+    font-size: 0.88rem;
+}
+
+.unit-test-card {
+    background-color: #e6f4ea !important;
+    border-left-color: #137333 !important;
+}
+.unit-test-card h4 { color: #137333; }
+
+.integration-test-card {
+    background-color: #e8f0fe !important;
+    border-left-color: #1a73e8 !important;
+}
+.integration-test-card h4 { color: #1a73e8; }
+
+.edge-case-card {
+    background-color: #fef3e2 !important;
+    border-left-color: #b06000 !important;
+}
+.edge-case-card h4 { color: #b06000; }
+
+/* Metrics Panels */
 .metrics-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -217,14 +329,7 @@ button:hover { background-color: #02b350; }
 .metric-label { margin: 0; font-size: 0.8rem; color: var(--text-secondary); }
 .trend.up { color: var(--accent-green); font-size: 0.75rem; font-weight: bold; }
 
-/* Lower Layout Grid Setup */
-.data-row-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 20px;
-}
-
-/* Beautiful Minimalist HTML Tables */
+/* Table Components */
 .project-table-card { overflow-x: auto; }
 .project-table {
     width: 100%;
@@ -249,8 +354,6 @@ button:hover { background-color: #02b350; }
     font-weight: bold;
 }
 .src-tag.jira { background-color: #0052cc22; color: #4c9aff; }
-.src-tag.confluence { background-color: #ffab0022; color: #ffc400; }
-.src-tag.file { background-color: #36b37e22; color: #36b37e; }
 
 .status-pill {
     padding: 4px 8px;
@@ -261,39 +364,23 @@ button:hover { background-color: #02b350; }
 .status-pill.completed { background-color: #04d36122; color: var(--accent-green); }
 .status-pill.progress { background-color: #ff950022; color: #ff9500; }
 
-/* Dynamic Database History Log Cards */
-.history-card-section {
-    display: flex;
-    flex-direction: column;
-    max-height: 260px;
-}
-
-.history-list {
-    flex-grow: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.history-entry-item {
+/* Info Card Settings Metadata */
+.info-metadata-card {
     background-color: var(--bg-input);
     border: 1px solid var(--border-color);
-    padding: 12px;
     border-radius: 8px;
-    cursor: pointer;
+    padding: 16px;
     font-size: 0.85rem;
-    transition: background 0.2s, border-color 0.2s;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
-.history-entry-item:hover {
-    background-color: #2c2c2e;
-    border-color: var(--accent-green);
+.info-metadata-card h4 { margin: 0 0 10px 0; color: var(--text-primary); }
+.info-metadata-card p { margin: 6px 0; color: var(--text-secondary); }
+.info-alert-text {
+    margin-top: 12px;
+    font-size: 0.78rem;
+    color: #ff9500;
+    font-style: italic;
 }
 
 .placeholder-text { color: #57575a; font-style: italic; }
-#loading { color: #ffdb58; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
-.hidden { display: none; }
+.hidden { display: none !important; }
