@@ -1,0 +1,299 @@
+/* Color Palette & Base Resets */
+:root {
+    --bg-dark-base: #121214;
+    --bg-card: #1c1c1e;
+    --bg-input: #121214;
+    --text-primary: #f5f5f7;
+    --text-secondary: #949499;
+    --accent-green: #04d361;
+    --accent-blue: #5856d6;
+    --border-color: #2c2c2e;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark-base);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Master Layout Grid */
+.app-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+/* Left Sidebar Styles */
+.sidebar {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo-area h2 {
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+    font-size: 1.4rem;
+}
+
+.tagline {
+    font-size: 0.75rem;
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 40px;
+    flex-grow: 1;
+}
+
+.menu-item {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu-item:hover, .menu-item.active {
+    background-color: #2c2c2e;
+    color: var(--text-primary);
+}
+
+.menu-item.active {
+    border-left: 3px solid var(--accent-green);
+    border-radius: 0 8px 8px 0;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.user-profile h4 { margin: 0; font-size: 0.9rem; }
+.user-profile p { margin: 0; font-size: 0.75rem; color: var(--text-secondary); }
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+/* Main Workspace Content Area */
+.main-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.content-header h1 { margin: 0 0 6px 0; font-size: 1.8rem; }
+.subtitle { margin: 0; color: var(--text-secondary); font-size: 0.95rem; }
+
+.header-badge {
+    background-color: #2c2c2e;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+/* Card Styling Fundamentals */
+.dashboard-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.dashboard-card h3 { margin: 0 0 6px 0; font-size: 1.1rem; }
+.card-subtitle { margin: 0 0 16px 0; color: var(--text-secondary); font-size: 0.85rem; }
+
+/* Interactive Workspace split grid */
+.workspace-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.interactive-card {
+    display: flex;
+    flex-direction: column;
+    height: 320px;
+}
+
+textarea {
+    flex-grow: 1;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: white;
+    padding: 12px;
+    font-size: 0.9rem;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+}
+
+textarea:focus { border-color: var(--accent-green); }
+
+button {
+    background-color: var(--accent-green);
+    color: #121214;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+}
+
+button:hover { background-color: #02b350; }
+
+#resultsDisplay {
+    flex-grow: 1;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+}
+
+/* Metrics Row Counter blocks */
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.metric-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.metric-card .icon {
+    font-size: 2rem;
+    background-color: var(--bg-input);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.metric-card h2 { margin: 4px 0; font-size: 1.6rem; }
+.metric-label { margin: 0; font-size: 0.8rem; color: var(--text-secondary); }
+.trend.up { color: var(--accent-green); font-size: 0.75rem; font-weight: bold; }
+
+/* Lower Layout Grid Setup */
+.data-row-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+/* Beautiful Minimalist HTML Tables */
+.project-table-card { overflow-x: auto; }
+.project-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.project-table th {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-table td { padding: 14px 12px; border-bottom: 1px solid var(--border-color); }
+
+.src-tag {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+.src-tag.jira { background-color: #0052cc22; color: #4c9aff; }
+.src-tag.confluence { background-color: #ffab0022; color: #ffc400; }
+.src-tag.file { background-color: #36b37e22; color: #36b37e; }
+
+.status-pill {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+.status-pill.completed { background-color: #04d36122; color: var(--accent-green); }
+.status-pill.progress { background-color: #ff950022; color: #ff9500; }
+
+/* Dynamic Database History Log Cards */
+.history-card-section {
+    display: flex;
+    flex-direction: column;
+    max-height: 260px;
+}
+
+.history-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-entry-item {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s, border-color 0.2s;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.history-entry-item:hover {
+    background-color: #2c2c2e;
+    border-color: var(--accent-green);
+}
+
+.placeholder-text { color: #57575a; font-style: italic; }
+#loading { color: #ffdb58; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+.hidden { display: none; }

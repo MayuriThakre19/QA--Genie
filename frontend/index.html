@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA-Genie: AI Test Case Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h2>🧞‍♂️ QA-Genie</h2>
+                <span class="tagline">AI-Powered Test Case Agent</span>
+            </div>
+            <nav class="menu">
+                <a href="#" class="menu-item active" data-target="overview-section">📊 Overview</a>
+                <a href="#" class="menu-item" data-target="generator-section">⚙️ Test Case Generator</a>
+                <a href="#" class="menu-item" data-target="suites-section">📁 Test Suites Explorer</a>
+                <a href="#" class="menu-item" data-target="settings-section">🛠️ Engine Settings</a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">M</div>
+                <div>
+                    <h4>Mayuri Thakre</h4>
+                    <p>QA Engineer Core</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <div id="overview-section" class="tab-view">
+                <header class="content-header">
+                    <div>
+                        <h1>👋 System Overview</h1>
+                        <p class="subtitle">Real-time telemetry and operation tracking for your local engine instances.</p>
+                    </div>
+                    <div class="header-badge">Hackathon Production v1.5</div>
+                </header>
+
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <span class="icon">📄</span>
+                        <div>
+                            <p class="metric-label">Total Logs Tracked</p>
+                            <h2 id="totalSessionsCount">0</h2>
+                            <span class="trend up">Live DB Sync</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="icon">🤖</span>
+                        <div>
+                            <p class="metric-label">AI Engine Model</p>
+                            <h2 id="currentModelBadge">Gemini 2.5 Flash</h2>
+                            <span class="trend up" style="color: #5856d6;">Online & Active</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="icon">⚡</span>
+                        <div>
+                            <p class="metric-label">Backend Engine</p>
+                            <h2>FastAPI</h2>
+                            <span class="trend up">Port 8000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card project-table-card" style="margin-top: 24px;">
+                    <h3>📊 Real-Time Database Transaction Ledger</h3>
+                    <p class="card-subtitle">Click on any past operational transaction record row below to view details:</p>
+                    <table class="project-table">
+                        <thead>
+                            <tr>
+                                <th>Session ID</th>
+                                <th>Requirement Preview</th>
+                                <th>Source Engine</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="liveTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="generator-section" class="tab-view hidden">
+                <header class="content-header">
+                    <div>
+                        <h1>⚙️ Test Case Generator</h1>
+                        <p class="subtitle">Inject raw business logic requirements to compile structured technical test matrices.</p>
+                    </div>
+                </header>
+
+                <div class="workspace-grid" style="margin-top: 24px;">
+                    <div class="dashboard-card interactive-card">
+                        <h3>📋 Input Product Requirements</h3>
+                        <p class="card-subtitle">Describe features, validation criteria, or API design specs:</p>
+                        <textarea id="requirementsInput" placeholder="Example: E-commerce coupon system where code 'SAVE10' takes 10% off. Error out on invalid inputs."></textarea>
+                        <button id="generateBtn" onclick="triggerGeneration()">Generate Test Suite ✨</button>
+                    </div>
+
+                    <div class="dashboard-card interactive-card">
+                        <h3>🚀 Generated Test Analytics</h3>
+                        <p class="card-subtitle">AI response payload matrix output:</p>
+                        <div id="loading" class="hidden">🤖 AI Agent is compiling test scripts... Please wait...</div>
+                        <div id="resultsDisplay" class="placeholder-text">Enter requirements and click Generate to start.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="suites-section" class="tab-view hidden">
+                <header class="content-header">
+                    <div>
+                        <h1>📁 Test Suites Repository Explorer</h1>
+                        <p class="subtitle">Review the status and metrics of compiled active target systems.</p>
+                    </div>
+                </header>
+
+                <div class="metrics-row" style="margin-top: 24px;">
+                    <div class="metric-card">
+                        <div>
+                            <p class="metric-label">E-Commerce Platform Core</p>
+                            <h3>320 Test Cases</h3>
+                            <span class="status-pill completed" style="display:inline-block; margin-top:8px;">Verified Build</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div>
+                            <p class="metric-label">Banking Secure Web Gateway</p>
+                            <h3>285 Test Cases</h3>
+                            <span class="status-pill completed" style="display:inline-block; margin-top:8px;">Verified Build</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div>
+                            <p class="metric-label">Mobile API Gateway Router</p>
+                            <h3>164 Test Cases</h3>
+                            <span class="status-pill progress" style="display:inline-block; margin-top:8px;">Evaluating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings-section" class="tab-view hidden">
+                <header class="content-header">
+                    <div>
+                        <h1>🛠️ Engine Parameters & Settings</h1>
+                        <p class="subtitle">Modify operational limits, temperature configurations, and engine targets.</p>
+                    </div>
+                </header>
+
+                <div class="dashboard-card" style="margin-top: 24px; max-width: 600px;">
+                    <h3>🤖 Model Configuration</h3>
+                    <p class="card-subtitle">Configure model temperature variables for generation flexibility:</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display:block; margin-bottom:8px; font-size:0.9rem; color:var(--text-secondary);">Select Target AI Inference Engine Model:</label>
+                        <select id="modelSelector" onchange="updateModelDisplay()" style="width:100%; padding:10px; background:var(--bg-input); border:1px solid var(--border-color); color:white; border-radius:6px;">
+                            <option value="Gemini 2.5 Flash">Gemini 2.5 Flash (Default Latency Optimization)</option>
+                            <option value="Gemini 2.5 Pro">Gemini 2.5 Pro (Deep Context Analytical Model)</option>
+                            <option value="Gemma 2B Local">Gemma 2B (Local Edge Inference Sandbox)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style="display:block; margin-bottom:8px; font-size:0.9rem; color:var(--text-secondary);">Model Temperature Strategy (Creativity vs Strict Logic):</label>
+                        <input type="range" min="0" max="100" value="20" style="width:100%; accent-color:var(--accent-green);">
+                        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">
+                            <span>Strict Edge Case Logic (0.0)</span>
+                            <span>Exploratory Creative QA (1.0)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
